@@ -18,7 +18,7 @@ on:
       - development
 
 jobs:
-  build:
+  build-gradle:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -33,7 +33,7 @@ jobs:
 
     - name: Build with Gradle
       run: ./gradlew build
-  login:
+  login-docker-hub:
     runs-on: ubuntu-latest
     environment: Action Secret
     steps:
@@ -42,3 +42,12 @@ jobs:
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
+  build-docker-hub:
+    runs-on: ubuntu-latest
+    env:
+      NAME: ba91
+      REPO: wooil-land-server
+    run:|
+      docker build -t $REPO .
+      docker tag $REPO:latest $NAME/$REPO:latest
+      docker push $NAME/$REPO:latest
