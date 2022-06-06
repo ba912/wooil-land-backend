@@ -49,3 +49,12 @@ jobs:
         docker build -t $REPO .
         docker tag $REPO:latest $NAME/$REPO:latest
         docker push $NAME/$REPO:latest
+  deploy:
+    needs: build
+    name: depoly
+    runs-on: self-hosted
+    steps:
+      - name: docker restart
+        run: |
+          docker ps -q --filter "name=wooil-land-backend" | grep -q . && docker stop "wooil-land-backend" && docker rm wooil-land-backend && docker rmi ba91/wooil-land-server
+          docker run -d --name wooil-land-backend -p 8080:8080 ba91/wooil-land-server
