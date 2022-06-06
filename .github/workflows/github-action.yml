@@ -44,10 +44,12 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
   build-docker-hub:
     runs-on: ubuntu-latest
-    env:
-      NAME: ba91
-      REPO: wooil-land-server
-    run:|
-      docker build -t $REPO .
-      docker tag $REPO:latest $NAME/$REPO:latest
-      docker push $NAME/$REPO:latest
+    steps:
+      - name: build and release to DockerHub
+        env:
+          NAME: ba91
+          REPO: wooil-land-server
+          run:
+            docker build -t $REPO .
+            docker tag $REPO:latest $NAME/$REPO:latest
+            docker push $NAME/$REPO:latest
