@@ -5,7 +5,7 @@ ___
 ### 💻 Development Spec
 + AWS EC2 ( Amazon Linux )
 + Docker
-+ Java 11 ( openjdk 11 )
++ Java ( openjdk 11 )
 + Spring Boot ( 2.7.0 )
 + Github & Action
 ___
