@@ -11,6 +11,7 @@ ___
 ___
 ### 📖 Development History
 1. CI / CD ( ~ 2022.06.06 )
-2. Social Login ( 예정 )
-3. Slack Bot ( 예정 )
+2. 배포완료시 Slack 알림 전송 ( ~ 2022.06.11)
+3. Social Login ( 예정 )
+4. Slack Bot ( 예정 )
 
