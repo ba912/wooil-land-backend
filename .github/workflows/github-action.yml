@@ -56,3 +56,14 @@ jobs:
         run: |
           docker ps -q --filter "name=wooil-land-backend" | grep -q . && docker stop "wooil-land-backend" && docker rm wooil-land-backend && docker rmi ba91/wooil-land-server
           docker run -d --name wooil-land-backend -p 8080:8080 ba91/wooil-land-server
+      - name: action-slack
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          author_name: Sloth Backend - dev
+          fields: repo,commit,message,author
+          mention: here
+          if_mention: failure,cancelled
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+        if: always() # Pick up events even if the job fails or is canceled.
